@@ -1,3 +1,50 @@
+### Set Up Env
+
+Create
+
+```sh
+pip install virtualenv
+virtualenv env_name
+```
+
+
+
+on mac -> RUN & QUIR
+
+``` sh
+source env_name/bin/activate
+```
+
+``` sh
+deactivate
+```
+
+### Django
+
+**Create a project**
+
+``` sh
+pip install Django
+django-admin startproject backend .
+```
+
+**Run Server**
+
+``` sh
+python3 manage.py runserver
+```
+
+**Create New App**
+
+```she
+python3 manage.py startapp playground
+```
+
+
+
+
+# 之后再说的，上面是需要run的code
+
 ## tech stack:
 
 Frontend: Next.js+tailwind CSS+ Javascript
