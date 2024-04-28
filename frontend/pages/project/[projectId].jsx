@@ -1,10 +1,14 @@
 import React from 'react'
 import Head from 'next/head';
-import ContentForm from '../components/ContentForm';
-import ContentDisplay from '../components/ContentDisplay';
+import ContentForm from '../../components/ContentForm';
+import ContentDisplay from '../../components/ContentDisplay';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const transform = () => {
+  const router = useRouter();
+  const { projectId } = router.query;
+
   const [generatedContent, setGeneratedContent] = useState('');
   const [hasGeneratedHistory, setHasGeneratedHistory] = useState(false);
 
