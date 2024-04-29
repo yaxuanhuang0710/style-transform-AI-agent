@@ -10,7 +10,7 @@ const userForm = () => {
   async function signup(e) {
     e.preventDefault(); // Prevent the default form submission
     try {
-        const response = await fetch('https://your-api-url/register', {
+        const response = await fetch('http://localhost:8000/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

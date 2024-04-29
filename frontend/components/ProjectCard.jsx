@@ -3,9 +3,25 @@ import { useRouter } from 'next/router';
 
 const projectCard = ({ projectId,title, description, type, createdOn }) => {
 
-  const handleDelete = () => {
-    // Add your delete logic here
-    console.log("Delete project");
+  const handleDelete = async () => {
+    if (confirm('Are you sure you want to delete this project?')) {
+      try {
+        const response = await fetch(`/api/projects/${projectId}`, {
+          method: 'DELETE',
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to delete the project.');
+        }
+
+        // Optionally, refresh the data or redirect
+        router.reload(); // This reloads the current page
+        // Or use router.push('/path-to-redirect') to redirect to another page
+      } catch (error) {
+        console.error('Error deleting the project:', error);
+        alert('Error deleting the project.');
+      }
+    }
   };
 
   return (

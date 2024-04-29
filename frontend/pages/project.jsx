@@ -1,16 +1,49 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import Head from 'next/head';
 import Link from 'next/link';
-
-const projects = [
-  { id: 1, title: 'Title', description: 'Lorem ipsum...',type: 'Linkedin Style', createdOn: 'May 20th' },
-  { id: 1, title: 'Title', description: 'Lorem ipsum...', type: 'Linkedin Style', createdOn: 'May 20th' },
-  { id: 1, title: 'Title', description: 'Lorem ipsum...', type: 'Linkedin Style', createdOn: 'May 20th' },
-   { id: 1, title: 'Title', description: 'Lorem ipsum...', type: 'Linkedin Style', createdOn: 'May 20th' },
-];
+import { useUser } from '../components/UserContext';
 
 const dashboard = () => {
+  //get project data from api
+  const { user } = useUser();
+  // const userId = user.id;
+  const userId = 1;
+
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/api/${userId}/projects`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        // For demo purposes, we'll use a hard-coded project list if the API fails
+        console.error('Failed to fetch projects:', error);
+        // setError(error.message || 'Failed to load');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, [userId]); // Dependency array includes userId to refetch if it changes
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error loading projects: {error}</p>;
+  }
+
   return (
     <>
     <Head>
@@ -20,7 +53,7 @@ const dashboard = () => {
     <div className="container mx-auto p-8">
   <div className="flex justify-between items-center mb-8">
     <h1 className="text-3xl font-bold">Project</h1>
-    <Link href='transform/new' passHref>
+    <Link href='project/new' passHref>
     <button className="bg-gradient-to-r from-purple-500 to-pink-500   text-white font-bold py-2 px-4 rounded">
       Add new project
     </button>
