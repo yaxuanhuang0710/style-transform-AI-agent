@@ -24,13 +24,21 @@ Content-Type: application/json
 
 
 ###
-# ### must add between test code. Otherwise, it will not work.
+
 
 # Sign in : Wrong User Name
 POST http://localhost:8000/signin
 Content-Type: application/json
 
 { "username" : "test@test.com", "password" : "test"}
+
+
+###
+
+
+GET http://localhost:8000/project/test
+
+{}
 
 
 ### 
@@ -42,3 +50,30 @@ Content-Type: application/json
 Authorization: Token c4bed12b51740181901d557b373346a07715a8eb
 
 {}
+
+
+###
+
+
+POST http://localhost:8000/create_project
+Content-Type: application/json
+
+{
+    "title": "Sample Project",
+    "tone": "Formal",
+    "purpose": "Demonstration",
+    "content": "This is a sample project to demonstrate the creation of a project via API.",
+    "type": "Demo",
+    "user": 1  // Assuming there is a user with ID 1 in your database
+}
+
+
+
+###
+
+
+GET http://localhost:8000/get_projects/?user_id=1
+
+
+
+

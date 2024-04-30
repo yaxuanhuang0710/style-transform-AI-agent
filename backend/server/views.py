@@ -41,3 +41,4 @@ from rest_framework.permissions import IsAuthenticated
 @permission_classes([IsAuthenticated])
 def token(request):
     return Response("pass for {}".format(request.user.username))
+
