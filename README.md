@@ -23,6 +23,7 @@ deactivate
 ``` sh
 pip install Django
 pip install djangorestframework
+python -m pip install django-cors-headers
 django-admin startproject backend .
 python manage.py migrate
 ```
