@@ -1,12 +1,7 @@
 import React from 'react'
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Home = () => {
-    const router = useRouter();
-
-  const navigateToSignIn = () => {
-    router.push('/signin'); // Replace '/signin' with the path to your sign-in page
-  };
   return (
     <div>
       <div className="flex flex-col items-center justify-center min-h-screen text-white bg-gray-950">
@@ -20,9 +15,11 @@ const Home = () => {
             make content management a breeze. Get started today and see the
             transformation.
           </p>
-          <button className="mt-6 bg-gradient-to-r from-purple-500 to-pink-500  text-white font-bold py-2 px-4 rounded" onClick={navigateToSignIn}>
+          <Link href="/signup">
+          <button className="mt-6 bg-gradient-to-r from-purple-500 to-pink-500  text-white font-bold py-2 px-4 rounded">
             Start Writing for free!
           </button>
+          </Link>
         </main>
       </div>
     </div>
