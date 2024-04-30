@@ -30,7 +30,10 @@ Content-Type: application/json
 POST http://localhost:8000/signin
 Content-Type: application/json
 
-{ "username" : "test@test.com", "password" : "test"}
+{ 
+  "username" : "test@test.com", 
+  "password" : "test"
+}
 
 
 ###
@@ -55,16 +58,16 @@ Authorization: Token c4bed12b51740181901d557b373346a07715a8eb
 ###
 
 
-POST http://localhost:8000/create_project
+POST http://localhost:8000/project/create
 Content-Type: application/json
 
 {
+    "user": 1,
     "title": "Sample Project",
     "tone": "Formal",
     "purpose": "Demonstration",
     "content": "This is a sample project to demonstrate the creation of a project via API.",
-    "type": "Demo",
-    "user": 1  // Assuming there is a user with ID 1 in your database
+    "type": "Demo"
 }
 
 

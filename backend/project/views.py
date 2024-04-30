@@ -15,12 +15,15 @@ def test(request):
 
 @api_view(["POST"])
 def create_project(request):
-    serializer = ProjectSerializer(data=request.data)
+    serializer = ProjectSerializer(data=request.data, context={'request': request})
     if serializer.is_valid():
-        serializer.save(username=request.user)
-        ## Save all data. such as username, project_id, title, tone, purpose, content, type, created_time.
+        serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
 
 @api_view(['GET'])
 def get_projects(request):
