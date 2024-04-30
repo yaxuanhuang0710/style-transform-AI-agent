@@ -10,12 +10,12 @@ const userForm = () => {
   async function signup(e) {
     e.preventDefault(); // Prevent the default form submission
     try {
-        const response = await fetch('http://localhost:8000/api/register', {
+        const response = await fetch('http://localhost:8000/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }) // Use state values here
+            body: JSON.stringify({ username:email, password:password }) // Use state values here
         });
         const data = await response.json();
         if (response.ok) {
