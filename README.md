@@ -3,16 +3,13 @@
 Create
 
 ```sh
-pip install virtualenv
-virtualenv env_name
+python3 -m venv venv  
 ```
 
-
-
-on mac -> RUN & QUIR
+RUN & QUIR (On mac)
 
 ``` sh
-source env_name/bin/activate
+source venv/bin/activate
 ```
 
 ``` sh
@@ -25,7 +22,9 @@ deactivate
 
 ``` sh
 pip install Django
+pip install djangorestframework
 django-admin startproject backend .
+python manage.py migrate
 ```
 
 **Run Server**
@@ -39,7 +38,6 @@ python3 manage.py runserver
 ```she
 python3 manage.py startapp playground
 ```
-
 
 
 
