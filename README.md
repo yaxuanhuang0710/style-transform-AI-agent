@@ -40,6 +40,15 @@ python3 manage.py runserver
 python3 manage.py startapp playground
 ```
 
+### Database
+
+``` sh
+python manage.py makemigrations
+python manage.py migrate
+```
+
+
+
 
 
 # 之后再说的，上面是需要run的code

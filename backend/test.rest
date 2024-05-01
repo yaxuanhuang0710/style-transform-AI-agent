@@ -24,13 +24,24 @@ Content-Type: application/json
 
 
 ###
-# ### must add between test code. Otherwise, it will not work.
+
 
 # Sign in : Wrong User Name
 POST http://localhost:8000/signin
 Content-Type: application/json
 
-{ "username" : "test@test.com", "password" : "test"}
+{ 
+  "username" : "test@test.com", 
+  "password" : "test"
+}
+
+
+###
+
+
+GET http://localhost:8000/project/test
+
+{}
 
 
 ### 
@@ -42,3 +53,70 @@ Content-Type: application/json
 Authorization: Token c4bed12b51740181901d557b373346a07715a8eb
 
 {}
+
+
+###
+
+
+POST http://localhost:8000/project/create
+Content-Type: application/json
+
+{
+    "user": 1,
+    "title": "Sample Project",
+    "tone": "Formal",
+    "purpose": "Demonstration",
+    "content": "This is a sample project to demonstrate the creation of a project via API.",
+    "type": "Demo"
+}
+
+
+
+###
+
+
+# Second create request.
+POST http://localhost:8000/project/create
+Content-Type: application/json
+
+{
+    "user": 1,
+    "title": "Sample Project 2",
+    "tone": "Formal",
+    "purpose": "Demonstration",
+    "content": "This is a sample project to demonstrate the creation of a project via API.",
+    "type": "Demo"
+}
+
+
+###
+
+
+GET http://localhost:8000/project/show_all_projects/1
+
+
+###
+
+
+GET http://localhost:8000/project/show_detail/7
+
+
+###
+
+
+DELETE http://localhost:8000/project/delete_project/6
+
+
+###
+
+
+PUT http://localhost:8000/project/update_project/7
+Content-Type: application/json
+
+{
+    "title": "Updated -> Sample Project 2",
+    "tone": "Updated ->Formal",
+    "purpose": "Updated ->Demonstration",
+    "content": "Updated ->This is a sample project to demonstrate the creation of a project via API.",
+    "type": "Updated ->Demo"
+}
