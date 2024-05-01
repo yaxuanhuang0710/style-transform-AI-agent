@@ -23,7 +23,7 @@ const Project = () => {
   useEffect(() => {
     if (projectId !== 'new') {
       setLoading(true);
-      fetch(`http://localhost:8000/api/projects/${projectId}`)
+      fetch(`http://localhost:8000/project/show_detail/${projectId}`)
         .then(res => res.json())
         .then(data => {
           setProjectData(data);
@@ -32,6 +32,8 @@ const Project = () => {
         .catch(error => console.error('Failed to fetch project data:', error));
     }
   }, [projectId]);
+
+  // console.log("parents",projectData);
 
   const handleUpdateProjectData = (key, value) => {
     setProjectData(prev => ({ ...prev, [key]: value }));
@@ -61,11 +63,10 @@ const Project = () => {
   };
 
   const handleSaveContent = async (content) => {
-    setLoading(true);
     if(projectId === 'new') {
     //create Project
     try {
-      const response = await fetch('http://localhost:8000/createProject', {
+      const response = await fetch('http://localhost:8000/project/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...projectData})
@@ -74,30 +75,27 @@ const Project = () => {
         throw new Error('Failed to save the content');
       }
       alert('Content saved successfully');
-      setLoading(false);
     } catch (error) {
       console.error('Error saving content:', error);
       alert('Error saving content: ' + error.message);
-      setLoading(false);
     }
   }
   else{
     //update Project
     try {
-      const response = await fetch(`http://localhost:8000/updateProject/${projectId}`, {
+      console.log("testestest",projectData);
+      const response = await fetch(`http://localhost:8000/project/update_project/${projectId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...projectData, content })
+        body: JSON.stringify({...projectData})
       });
       if (!response.ok) {
         throw new Error('Failed to save the content');
       }
       alert('Content saved successfully');
-      setLoading(false);
     } catch (error) {
       console.error('Error saving content:', error);
       alert('Error saving content: ' + error.message);
-      setLoading(false);
     }
   }
   };
@@ -112,7 +110,8 @@ const Project = () => {
           <ContentForm projectData={projectData} onUpdate={handleUpdateProjectData} onGenerate={handleGenerateContent}/>
         </div>
         <div className="w-1/2 flex flex-col items-center justify-center p-8">
-          <ContentDisplay content={projectData.generatedContent} onSave={handleSaveContent} isLoading={loading} />
+          {/* <ContentDisplay content={projectData.generated_content} onSave={handleSaveContent} isLoading={loading} /> */}
+          <ContentDisplay projectData={projectData} onUpdate={handleUpdateProjectData} onSave={handleSaveContent} isLoading={loading} />
         </div>
       </div>
     </div>

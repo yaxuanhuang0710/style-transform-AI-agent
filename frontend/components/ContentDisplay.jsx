@@ -1,13 +1,22 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useUser } from './UserContext';
 
-const ContentDisplay = ({ content, onSave, isLoading }) => {
-  const [editableContent, setEditableContent] = useState(content);
-  const showContent = content && content.length > 0;
+const ContentDisplay = ({ projectData, onUpdate,onSave, isLoading }) => {
+  // const { content } = projectData.generated_content;
+  // const [editableContent, setEditableContent] = useState(content);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    onUpdate(name, value);
+  };
+  // useEffect(() => {
+  //   setEditableContent(content);
+  // }, [content]); // This tells React to re-run the effect when `content` changes
 
   const handleSave = () => {
-      onSave(editableContent);  // Calls the onSave function passed from the parent with the updated content
+    // console.log("child", projectData);
+    onSave(projectData);  // Calls the onSave function passed from the parent with the updated content
   };
 
     if (isLoading) {
@@ -16,7 +25,7 @@ const ContentDisplay = ({ content, onSave, isLoading }) => {
     
     return (
       <div className="flex flex-col h-full w-full"> {/* This will make sure to use the full height and width */}
-        {!showContent ? (
+        {!projectData.generated_content ? (
           <div className="flex flex-col items-center justify-center flex-grow"> {/* flex-grow will use available space */}
             <img src="/transform.svg" alt="AI" className="mx-auto mb-4" />
             <p className="text-center text-white">Your copies created by artificial intelligence will appear here.</p>
@@ -24,9 +33,11 @@ const ContentDisplay = ({ content, onSave, isLoading }) => {
         ): (
           <>
           <textarea 
+            name="generated_content"
             className="flex-grow rounded-md bg-gray-800 p-4 text-white resize-none"
-            value={editableContent}
-            onChange={(e) => setEditableContent(e.target.value)}
+            value={projectData.generated_content}
+            onChange={handleChange}
+            // onChange={(e) => setEditableContent(e.target.value)}
           />
           <div className='flex justify-items-end'>
             <div className="w-3/4"></div>

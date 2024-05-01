@@ -70,8 +70,6 @@ Content-Type: application/json
     "type": "Demo"
 }
 
-
-
 ###
 
 
@@ -98,7 +96,7 @@ GET http://localhost:8000/project/show_all_projects/1
 ###
 
 
-GET http://localhost:8000/project/show_detail/7
+GET http://localhost:8000/project/show_detail/10
 
 
 ###
@@ -110,13 +108,34 @@ DELETE http://localhost:8000/project/delete_project/6
 ###
 
 
-PUT http://localhost:8000/project/update_project/7
+PUT http://localhost:8000/project/update_project/10
 Content-Type: application/json
 
 {
-    "title": "Updated -> Sample Project 2",
+    "project_id": 10,
+    "user": 1,
+    "title": "U123",
+    "tone": "Updated ->Formal",
+    "purpose": "Updated ->Demonstration",
+    "type": "Updated ->Demo",
+    "content": "Updated ->This is a sample project to demonstrate the creation of a project via API.",
+    "generated_content": "Updated ->This is a sample project to demonstrate the creation of a project via API.",
+    "created_time": "2024-05-01T18:53:29.687752Z"
+}
+
+
+
+###
+
+
+PUT http://localhost:8000/project/update_project/10
+Content-Type: application/json
+
+{
+    "title": "Updated4",
     "tone": "Updated ->Formal",
     "purpose": "Updated ->Demonstration",
     "content": "Updated ->This is a sample project to demonstrate the creation of a project via API.",
-    "type": "Updated ->Demo"
+    "type": "Updated ->Demo",
+    "generated_content": "Updated ->This is a sample project to demonstrate the creation of a project via API."
 }

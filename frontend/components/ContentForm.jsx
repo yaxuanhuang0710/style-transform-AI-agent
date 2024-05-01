@@ -51,7 +51,7 @@ const ContentForm = ({ projectData, onUpdate, onGenerate }) => {
             onChange={handleChange}></textarea>
             </label>
             <label class="block mt-3">
-                <span class="text-gray-50">What type of event is it?</span>
+                <span class="text-gray-50">What type of social media do you want?</span>
                 <select 
                 name="type"
                 class="bg-gray-950 block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
