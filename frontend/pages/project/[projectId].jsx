@@ -41,14 +41,7 @@ const Project = () => {
   const handleUpdateProjectData = (key, value) => {
     setProjectData(prev => ({ ...prev, [key]: value }));
   };
-
-  //extract content from the response
-  function extractContent(dataString) {
-    const contentMatch = /content='([^']+)'/;
-    const match = dataString.match(contentMatch);
-    return match ? match[1] : null;
-}
-
+  
   const handleGenerateContent = () => {
     setLoading(true);
     fetch('http://localhost:8000/chatbot/chat_with_gpt', {
@@ -64,8 +57,8 @@ const Project = () => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log("generated",extractContent(data.generated_content));
-      setProjectData(prev => ({ ...prev, generated_content: extractContent(data.generated_content) }));
+      // console.log("generated",extractContent(data.generated_content));
+      setProjectData(prev => ({ ...prev, generated_content: data.generated_content}));
       console.log("projectData after generating",projectData);
       setLoading(false);
     })
