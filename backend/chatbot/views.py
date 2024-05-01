@@ -37,7 +37,7 @@ def chat_with_gpt(request):
         )
         
         # Extract the generated text
-        generated_content = str(response.choices[0].message)
+        generated_content = str(response.choices[0].message.content)
         
         # Return the generated content
         return JsonResponse({"generated_content": generated_content}, status=status.HTTP_200_OK)
