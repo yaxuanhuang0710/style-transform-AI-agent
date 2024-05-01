@@ -4,12 +4,12 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 import openai
 from openai import OpenAI
-openai.api_key = 'sk-proj-i8McOAmG4v82pgL5Da5TT3BlbkFJEKeUAPUHFUzfQwDhYbeH'
+# openai.api_key = 'sk-proj-i8McOAmG4v82pgL5Da5TT3BlbkFJEKeUAPUHFUzfQwDhYbeH'
 # 'sk-proj-TXOEBJBBisfQZq4uZeEVT3BlbkFJLu1j7i8kSmZEcCejHeYr'
 
 from openai import OpenAI
 
-client = OpenAI()
+client = OpenAI(api_key='sk-proj-i8McOAmG4v82pgL5Da5TT3BlbkFJEKeUAPUHFUzfQwDhYbeH')
 
 # Create your views here.
 @api_view(['POST'])

@@ -96,7 +96,7 @@ GET http://localhost:8000/project/show_all_projects/1
 ###
 
 
-GET http://localhost:8000/project/show_detail/10
+GET http://localhost:8000/project/show_detail/12
 
 
 ###
@@ -136,10 +136,6 @@ Content-Type: application/json
     "tone": "Updated ->Formal",
     "purpose": "Updated ->Demonstration",
     "content": "Updated ->This is a sample project to demonstrate the creation of a project via API.",
-<<<<<<< HEAD
-    "type": "Updated ->Demo",
-    "generated_content": "Updated ->This is a sample project to demonstrate the creation of a project via API."
-=======
     "type": "Updated ->Demo"
 }
 
@@ -156,5 +152,4 @@ Content-Type: application/json
     "purpose": "Updated ->Demonstration",
     "content": "Updated ->This is a sample project to demonstrate the creation of a project via API.",
     "type": "Updated ->Demo"
->>>>>>> chatGPT
 }
