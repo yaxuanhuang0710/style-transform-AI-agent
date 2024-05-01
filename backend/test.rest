@@ -101,5 +101,8 @@ GET http://localhost:8000/project/show_all_projects/1
 GET http://localhost:8000/project/show_detail/1
 
 
+###
 
+
+DELETE http://localhost:8000/project/delete_project/4
 

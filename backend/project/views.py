@@ -24,16 +24,6 @@ def create_project(request):
 
 
 @api_view(['GET'])
-# def show_all_projects(request, user_id):
-#     try:
-#         user = User.objects.get(id=user_id)
-#     except User.DoesNotExist:
-#         return Response({'error': 'User not found'}, status=404)
-
-#     projects = Project.objects.filter(user=user)
-#     project_titles = [project.title for project in projects]
-
-#     return Response({'project_titles': project_titles})
 def show_all_projects(request, user_id):
     user = get_object_or_404(User, id=user_id)
     projects = Project.objects.filter(user=user)
@@ -50,3 +40,9 @@ def show_detail(request, project_id):
 
     serializer = ProjectSerializer(project)
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def delete_project(request, project_id):
+    project = get_object_or_404(Project, project_id=project_id)  # Ensures project exists or returns 404
+    project.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)  # 204 is standard for a successful delete without returning data
