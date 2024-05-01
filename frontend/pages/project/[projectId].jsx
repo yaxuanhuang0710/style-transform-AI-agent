@@ -62,8 +62,10 @@ const Project = () => {
 
   const handleSaveContent = async (content) => {
     setLoading(true);
+    if(projectId === 'new') {
+    //create Project
     try {
-      const response = await fetch('http://localhost:8000/api/saveProject', {
+      const response = await fetch('http://localhost:8000/createProject', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...projectData})
@@ -78,6 +80,26 @@ const Project = () => {
       alert('Error saving content: ' + error.message);
       setLoading(false);
     }
+  }
+  else{
+    //update Project
+    try {
+      const response = await fetch(`http://localhost:8000/updateProject/${projectId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...projectData, content })
+      });
+      if (!response.ok) {
+        throw new Error('Failed to save the content');
+      }
+      alert('Content saved successfully');
+      setLoading(false);
+    } catch (error) {
+      console.error('Error saving content:', error);
+      alert('Error saving content: ' + error.message);
+      setLoading(false);
+    }
+  }
   };
 
   return (
