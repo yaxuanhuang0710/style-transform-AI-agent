@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useUser } from '../components/UserContext';
+import Cookies from 'js-cookie';
 
 const dashboard = () => {
   //get project data from api
-  const { user } = useUser();
+  const userId=Cookies.get('user');
   // const userId = user.id;
-  const userId = 1;
+  // const userId = user.id;
 
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,12 +18,13 @@ const dashboard = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/${userId}/projects`);
+        const response = await fetch(`http://localhost:8000/project/show_all_projects/${userId}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setProjects(data);
+        setProjects(data.projects);
+        console.log(data.projects);
       } catch (error) {
         // For demo purposes, we'll use a hard-coded project list if the API fails
         console.error('Failed to fetch projects:', error);

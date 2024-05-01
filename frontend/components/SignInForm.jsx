@@ -1,16 +1,19 @@
 import React from 'react'
 import {useState } from 'react';
 import { useRouter } from 'next/router';
+// import { useUser } from './UserContext';
+import Cookies from 'js-cookie';
 
-const userForm = () => {
+const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  // const { setUser } = useUser();
 
   async function signin(e) {
     e.preventDefault(); // Prevent the default form submission
     try {
-        const response = await fetch('http://localhost:8000/signin', {
+        const response = await fetch('http://127.0.0.1:8000/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,13 +23,20 @@ const userForm = () => {
         const data = await response.json();
         if (response.ok) {
             // Assuming useUser is a hook to manage user state and it’s imported
-            useUser().setUser(data.user); // Set user data in context
-            Cookies.set('user', JSON.stringify(data.user)); // Store user data in cookie
+            // setUser(data.user); // Set user in context
+            Cookies.set('user', JSON.stringify(data.user.id)); // Store in cookies
+            console.log(data);
             //redirect to the dashboard page
-            const userId = data.user.id; // Assuming the user ID is available in the response
-            router.push(`/dashboard/${userId}`);
+            router.push(`/project`);
         } else {
-            throw new Error('Failed to log in');
+            if(response.status === 404)
+            {
+                alert('User not found');
+            }
+            else if(response.status === 400)
+            {
+                alert('Invalid password');
+            }
         }
     } catch (error) {
         console.error('Login error:', error);
@@ -83,4 +93,4 @@ const userForm = () => {
   );
 }
 
-export default userForm
+export default SignInForm

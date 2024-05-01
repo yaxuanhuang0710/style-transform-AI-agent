@@ -1,16 +1,19 @@
 import React from 'react'
-import {useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
+// import { useUser } from './UserContext';
+import Cookies from 'js-cookie';
 
-const userForm = () => {
+const SignUpForm= () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  // const { setUser } = useUser();
 
   async function signup(e) {
     e.preventDefault(); // Prevent the default form submission
     try {
-        const response = await fetch('http://localhost:8000/signup', {
+        const response = await fetch('http://127.0.0.1:8000/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,16 +23,18 @@ const userForm = () => {
         const data = await response.json();
         if (response.ok) {
             // Assuming useUser is a hook to manage user state and it’s imported
-            useUser().setUser(data.user); // Set user data in context
-            Cookies.set('user', JSON.stringify(data.user)); // Store user data in cookie
+            // setUser(data.user); // Set user in context
+            Cookies.set('user', JSON.stringify(data.user.id)); // Store in cookies
             //redirect to the dashboard page
-            const userId = data.user.id; // Assuming the user ID is available in the response
-            router.push(`/dashboard/${userId}`);
-        } else {
-            throw new Error('Failed to log in');
+            router.push(`/project`);
+            //notification
+            alert('Sign up successful');
+        } 
+        else{
+          alert('The email has already been taken. Please try again with a different email.');
         }
     } catch (error) {
-        console.error('Login error:', error);
+        console.error('Sign up error:', error);
     }
   }
       return (
@@ -83,4 +88,4 @@ const userForm = () => {
   );
 }
 
-export default userForm
+export default SignUpForm

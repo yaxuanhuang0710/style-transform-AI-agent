@@ -2,11 +2,9 @@ import "../styles/globals.css";
 import NavBar from "../components/NavBar";
 import Head from "next/head";
 import Footer from "../components/Footer";
-import {UserProvider} from "../components/UserContext";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+function MyApp({ Component, pageProps: { ...pageProps } }) {
   return (
-    <UserProvider>
     <div>
       <Head>
         <title>AI Writing Style Transformer</title>
@@ -16,7 +14,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <Component {...pageProps} />
         <Footer />
       </div>
-    </UserProvider>
   );
 }
 
