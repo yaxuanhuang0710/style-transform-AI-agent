@@ -98,11 +98,25 @@ GET http://localhost:8000/project/show_all_projects/1
 ###
 
 
-GET http://localhost:8000/project/show_detail/1
+GET http://localhost:8000/project/show_detail/7
 
 
 ###
 
 
-DELETE http://localhost:8000/project/delete_project/4
+DELETE http://localhost:8000/project/delete_project/6
 
+
+###
+
+
+PUT http://localhost:8000/project/update_project/7
+Content-Type: application/json
+
+{
+    "title": "Updated -> Sample Project 2",
+    "tone": "Updated ->Formal",
+    "purpose": "Updated ->Demonstration",
+    "content": "Updated ->This is a sample project to demonstrate the creation of a project via API.",
+    "type": "Updated ->Demo"
+}

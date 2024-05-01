@@ -15,7 +15,6 @@ def test(request):
 
 @api_view(["POST"])
 def create_project(request):
-    #serializer = ProjectSerializer(data=request.data, context={'request': request})
     serializer = ProjectSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -23,12 +22,29 @@ def create_project(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['PUT'])
+def update_project(request, project_id):
+    project = get_object_or_404(Project, project_id=project_id)
+    serializer = ProjectSerializer(project, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def delete_project(request, project_id):
+    project = get_object_or_404(Project, project_id=project_id)  # Ensures project exists or returns 404
+    project.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)  # 204 is standard for a successful delete without returning data
+
+
 @api_view(['GET'])
 def show_all_projects(request, user_id):
     user = get_object_or_404(User, id=user_id)
-    projects = Project.objects.filter(user=user)
-    project_titles = [project.title for project in projects]
-    return Response({'project_titles': project_titles})
+    projects = Project.objects.filter(user=user).order_by('-created_time')
+    # project_titles = [project.title for project in projects]
+    return Response({'projects': projects.values()})
 
 
 @api_view(['GET'])
@@ -40,9 +56,3 @@ def show_detail(request, project_id):
 
     serializer = ProjectSerializer(project)
     return Response(serializer.data)
-
-@api_view(['DELETE'])
-def delete_project(request, project_id):
-    project = get_object_or_404(Project, project_id=project_id)  # Ensures project exists or returns 404
-    project.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)  # 204 is standard for a successful delete without returning data
