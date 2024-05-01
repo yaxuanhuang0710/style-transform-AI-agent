@@ -16,6 +16,10 @@ source venv/bin/activate
 deactivate
 ```
 
+``pip install -r requirements.txt``  <- Install required package.
+
+
+
 ### Django
 
 **Create a project**
