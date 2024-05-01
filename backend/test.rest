@@ -120,3 +120,18 @@ Content-Type: application/json
     "content": "Updated ->This is a sample project to demonstrate the creation of a project via API.",
     "type": "Updated ->Demo"
 }
+
+
+###
+
+
+POST http://localhost:8000/chatbot/chat_with_gpt
+Content-Type: application/json
+
+{
+    "title": "Hello World",
+    "tone": "Updated ->Formal",
+    "purpose": "Updated ->Demonstration",
+    "content": "Updated ->This is a sample project to demonstrate the creation of a project via API.",
+    "type": "Updated ->Demo"
+}
