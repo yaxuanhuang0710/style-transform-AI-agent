@@ -30,7 +30,7 @@ const projectCard = ({ projectId,title, description, type, createdOn }) => {
     return text;
 }
   return (
-    <div className="bg-gray-800 text-white p-6 rounded-lg border border-purple-500 relative cursor-pointer">
+    <div className="bg-gray-800 text-white p-6 rounded-lg border border-purple-500 relative cursor-pointer h-52 overflow-auto">
       <button 
         onClick={handleDelete} 
         className="absolute top-1 right-2 text-gray-300 hover:text-gray-100"
@@ -38,10 +38,12 @@ const projectCard = ({ projectId,title, description, type, createdOn }) => {
       >
         &times; {/* This is a simple "X" symbol used as a delete button */}
       </button>
+      <div className="flex flex-col justify-between h-full">
       <h3 className="text-xl font-bold mb-2 text-pink-400 opacity-90">{title}</h3>
       <p className="mb-2">{truncateText(description,100)}</p>
       <p className="text-purple-300">{type} Style</p>
       <p className="text-xs pt-1">{`Created on ${createdOn.split('T')[0]}`}</p>
+    </div>
     </div>
   );
 }

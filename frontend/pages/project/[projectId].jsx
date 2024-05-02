@@ -3,10 +3,13 @@ import Head from 'next/head';
 import ContentForm from '../../components/ContentForm';
 import ContentDisplay from '../../components/ContentDisplay';
 import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 
 const Project = () => {
   const router = useRouter();
   const { projectId } = router.query;
+  const userId=Cookies.get('user');
+
   const [projectData, setProjectData] = useState({
     projectId: '',
     title: '',
@@ -16,7 +19,7 @@ const Project = () => {
     type: '',
     generatedContent: '',
     createdTime: '',
-    createdBy: ''
+    user: userId
   });
   const [loading, setLoading] = useState(false);
 
@@ -38,22 +41,25 @@ const Project = () => {
   const handleUpdateProjectData = (key, value) => {
     setProjectData(prev => ({ ...prev, [key]: value }));
   };
-
+  
   const handleGenerateContent = () => {
     setLoading(true);
-    fetch('http://localhost:8000/api/generateContent', {
+    fetch('http://localhost:8000/chatbot/chat_with_gpt', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
         title: projectData.title, 
         tone: projectData.tone, 
-        purpose: projectData.purpose, 
+        purpose: projectData.purpose,
+        content: projectData.content,
         type: projectData.type
       })
     })
     .then(res => res.json())
     .then(data => {
-      setProjectData(prev => ({ ...prev, generatedContent: data.generatedContent }));
+      // console.log("generated",extractContent(data.generated_content));
+      setProjectData(prev => ({ ...prev, generated_content: data.generated_content}));
+      console.log("projectData after generating",projectData);
       setLoading(false);
     })
     .catch(error => {

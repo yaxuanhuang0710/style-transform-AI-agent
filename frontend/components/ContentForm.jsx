@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect} from 'react';
+import Link from 'next/link';
 
 const ContentForm = ({ projectData, onUpdate, onGenerate }) => {
 
@@ -67,7 +68,9 @@ const ContentForm = ({ projectData, onUpdate, onGenerate }) => {
       {/* Include other form fields here */}
       <div class="mt-6 flex justify-center">
         <div className='w-full'>
+        <Link href={`/project`}>
         <button className='text-white bg-transparent hover:bg-gray-500 font-semibold py-2 px-4 border border-white hover:border-transparent rounded'>Back</button>
+      </Link>
         </div>
       <button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
         Generate
