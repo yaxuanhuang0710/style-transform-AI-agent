@@ -8,4 +8,5 @@ urlpatterns = [
     re_path('signup', views.signup),
     re_path('token', views.token),
     path('project/', include('project.urls')),
+    path('chatbot/', include('chatbot.urls')),
 ]
