@@ -13,7 +13,7 @@ const SignInForm = () => {
   async function signin(e) {
     e.preventDefault(); // Prevent the default form submission
     try {
-        const response = await fetch('http://127.0.0.1:8000/signin', {
+        const response = await fetch('http://3.80.75.241:8000/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
