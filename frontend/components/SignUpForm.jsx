@@ -13,7 +13,7 @@ const SignUpForm= () => {
   async function signup(e) {
     e.preventDefault(); // Prevent the default form submission
     try {
-        const response = await fetch('/api/proxy/signup', {
+        const response = await fetch('http://3.80.75.241:8000/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
