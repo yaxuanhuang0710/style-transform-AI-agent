@@ -7,7 +7,7 @@ const projectCard = ({ projectId,title, description, type, createdOn }) => {
     event.stopPropagation();
     if (confirm('Are you sure you want to delete this project?')) {
       try {
-        const response = await fetch(`http://3.93.167.118:8000/project/delete_project/${projectId}`, {
+        const response = await fetch(`/api/project/delete_project/${projectId}`, {
           method: 'DELETE',
         });
 
