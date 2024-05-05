@@ -3,6 +3,11 @@ import { useRouter } from 'next/router';
 
 const projectCard = ({ projectId,title, description, type, createdOn }) => {
   const router = useRouter();
+
+  const navigateToDetail = () => {
+    router.push(`/project/${projectId}`);
+  };
+
   const handleDelete = async (event) => {
     event.stopPropagation();
     if (confirm('Are you sure you want to delete this project?')) {
@@ -30,7 +35,7 @@ const projectCard = ({ projectId,title, description, type, createdOn }) => {
     return text;
 }
   return (
-    <div className="bg-gray-800 text-white p-6 rounded-lg border border-purple-500 relative cursor-pointer h-52 overflow-auto">
+    <div className="bg-gray-800 text-white p-6 rounded-lg border border-purple-500 relative cursor-pointer h-52 overflow-auto" onClick={navigateToDetail}>
       <button 
         onClick={handleDelete} 
         className="absolute top-1 right-2 text-gray-300 hover:text-gray-100"
