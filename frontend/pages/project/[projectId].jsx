@@ -26,7 +26,7 @@ const Project = () => {
   useEffect(() => {
     if (projectId !== 'new') {
       setLoading(true);
-      fetch(`/api/proxy/project/show_detail/${projectId}`)
+      fetch(`http://3.93.167.118:8000/project/show_detail/${projectId}`)
         .then(res => res.json())
         .then(data => {
           setProjectData(data);
@@ -44,7 +44,7 @@ const Project = () => {
   
   const handleGenerateContent = () => {
     setLoading(true);
-    fetch('/api/proxy/chatbot/chat_with_gpt', {
+    fetch('http://3.93.167.118:8000/chatbot/chat_with_gpt', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
@@ -72,7 +72,7 @@ const Project = () => {
     if(projectId === 'new') {
     //create Project
     try {
-      const response = await fetch('/api/proxy/project/create', {
+      const response = await fetch('http://3.93.167.118:8000/project/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...projectData})
@@ -90,7 +90,7 @@ const Project = () => {
     //update Project
     try {
       console.log("testestest",projectData);
-      const response = await fetch(`/api/proxy/project/update_project/${projectId}`, {
+      const response = await fetch(`http://3.93.167.118:8000/project/update_project/${projectId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({...projectData})

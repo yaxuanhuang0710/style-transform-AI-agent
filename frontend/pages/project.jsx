@@ -18,7 +18,7 @@ const dashboard = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`/api/proxy/project/show_all_projects/${userId}`);
+        const response = await fetch(`http://3.93.167.118:8000/project/show_all_projects/${userId}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
