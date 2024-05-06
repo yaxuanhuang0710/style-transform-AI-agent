@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import NavBar from "../components/NavBar";
 import Head from "next/head";
 import Footer from "../components/Footer";
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function MyApp({ Component, pageProps: { ...pageProps } }) {
   return (
@@ -13,6 +15,8 @@ function MyApp({ Component, pageProps: { ...pageProps } }) {
       <NavBar />
       <Component {...pageProps} />
         <Footer />
+      <Analytics/>
+      <SpeedInsights/>
       </div>
   );
 }
